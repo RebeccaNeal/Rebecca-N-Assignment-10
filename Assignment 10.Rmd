@@ -1,49 +1,61 @@
 ---
-title: "Rebecca N Assignment 10"
+title: "Assignment 10"
 output: html_notebook
-author: "Rebecca Neal"
-Date: "19 April"
-Version: "1.0"
+author: Rebecca Neal
+date: 17 April 2020
+version: 1.0
+
 ---
 
-This is a notebook for Assignment 10 focused on data wrangling
+This is a script for Assignment 10 focusing on importing and wrangling data
 
-### Load in packages
-```{r}
+### Load in package
+```{r include=FALSE}
 library(tidyverse)
 library(ggplot2)
 ```
 
-### Q1 Load data
+### Q1 Import Johnson Elementary School Data
 ```{r}
 JE <- read_csv("Johnson Elementary ELA Project.csv", skip=4,
                col_names= c("Room", "Student ID", 
                "TA", "1st Quarter", "2nd Quarter","3rd Quarter", "4th Quarter"),
                na = "NA")
+               
+          
+
+
+
+        
 ```
 
-### Q1 Seperate Tardies and Absences
+### Q1 Tidy Johnson Elemntary School Data
 ```{r}
 JE <- JE %>%
   separate(TA, into = c("Tardies", "Absences"), sep = ";")
+  
 ```
 
-### Q1 Clean Tardies & Absences
 ```{r}
 JE$Tardies <- parse_integer(JE$Tardies)
 JE$Absences <- parse_integer(JE$Absences)
 ```
 
-### Q1 Fill in room data
 ```{r}
-JE <- JE %>%
-  fill(Room)
+JE %>%
+  fill("Room")
+View(JE)
+```
+
+?fill
+
+### Q2 
+```{r}
+JE %>%
+  group_by(`Room Number`) %>%
+  summarize(Tardie_mean = mean(Tardies))
+  
 ```
 
 
-
-
-
-
-
-
+```{r}
