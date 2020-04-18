@@ -39,6 +39,12 @@ JE <- JE %>%
   fill(Room)
 ```
 
+### Q2 Write script for summary tardies and absences by room number
+```{r}
+JE %>%
+  group_by(Room) %>%
+  summarize(Absence_Mean = mean(Absences))
+```
 
 
 
