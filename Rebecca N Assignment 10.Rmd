@@ -61,17 +61,8 @@ JE %>%
 ### Q3 Frequency of missing data points for each quarter by room
 ```{r}
 Missing_Data <- JE %>%
-  group_by(Room) %>%
-  count(sum(is.na(`2nd Quarter`))) 
-
+  group_by(Room, Quarter) %>%
+  count(sum(is.na(Scores)))
 ```
-
-
-
-
-
-
-
-
 
 
