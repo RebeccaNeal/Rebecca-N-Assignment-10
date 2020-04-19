@@ -43,8 +43,10 @@ JE <- JE %>%
 ```{r}
 JE %>%
   group_by(Room) %>%
-  summarize(Absence_Mean = mean(Absences))
+  summarize(Absence_Mean = mean(Absences, na.rm=TRUE))
 ```
+
+
 
 
 
