@@ -66,3 +66,34 @@ Missing_Data <- JE %>%
 ```
 
 
+### Q4 Create median score for each quarter by room number
+```{r}
+JE_Median <- JE %>%
+  group_by(Room, Quarter) %>%
+  summarize(Room_Median = median(Scores, na.rm = TRUE))
+```
+
+
+### Q4 Graph with median score trends across the four quarters for the fifth grade classes
+```{r}
+ggplot(JE_Median, aes(x = Quarter, y = Room_Median)) +
+  geom_point() +
+  facet_wrap(vars(Room))
+  
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
