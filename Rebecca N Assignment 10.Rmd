@@ -36,7 +36,9 @@ JE$Absences <- parse_integer(JE$Absences)
 ### Q1 Fill in room data
 ```{r}
 JE <- JE %>%
-  fill(Room)
+  fill(Room) %>%
+  drop_na(`Student ID`)
+  
 ```
 
 ### Q2 Write script for summary tardies and absences by room number
@@ -45,6 +47,14 @@ JE %>%
   group_by(Room) %>%
   summarize(Absence_Mean = mean(Absences, na.rm=TRUE))
 ```
+
+### Q3 Frequency of missing data points for each quarter by room
+```{r}
+Missing_Data <- JE %>%
+  group_by(Room) %>%
+  count(sum(is.na(`1st Quarter`)))
+```
+
 
 
 
