@@ -18,13 +18,14 @@ library(ggplot2)
 ```{r}
 JE <- read_csv("Johnson Elementary ELA Project.csv", skip=4,
                col_names= c("Room", "Student ID", 
-               "TA", "1st Quarter", "2nd Quarter","3rd Quarter", "4th Quarter"))
+               "TA", "Q1", "Q2","Q3", "Q4"))
 ```
 
 ### Q1 Seperate Tardies and Absences
 ```{r}
 JE <- JE %>%
-  separate(TA, into = c("Tardies", "Absences"), sep = ";")
+  separate(TA, into = c("Tardies", "Absences"), sep = ";") 
+  
 ```
 
 ### Q1 Clean Tardies & Absences
@@ -33,11 +34,14 @@ JE$Tardies <- parse_integer(JE$Tardies)
 JE$Absences <- parse_integer(JE$Absences)
 ```
 
-### Q1 Fill in room data
+### Q1 Fill in room data, drop header lines, and make Quarter and Scores variable
 ```{r}
 JE <- JE %>%
   fill(Room) %>%
-  drop_na(`Student ID`)
+  drop_na(`Student ID`) %>%
+  gather(Q1, Q2, Q3, Q4,
+         key = "Quarter",
+         value = "Scores")
   
 ```
 
@@ -58,7 +62,8 @@ JE %>%
 ```{r}
 Missing_Data <- JE %>%
   group_by(Room) %>%
-  count(sum(is.na(`1st Quarter`)))
+  count(sum(is.na(`2nd Quarter`))) 
+
 ```
 
 
