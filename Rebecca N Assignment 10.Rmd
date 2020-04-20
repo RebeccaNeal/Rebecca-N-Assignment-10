@@ -98,8 +98,13 @@ NYC_ATL <- NYC %>%
 
 
 ```{r}
-ggplot(data = NYC_ATL, mapping = aes(x=carrier))+
-  geom_bar(aes(fill = on_time), position = "fill")
+ggplot(data = NYC_ATL, mapping = aes(x=carrier)) +
+  geom_bar(aes(fill = on_time), position = "fill") +
+  labs(x = "Airline Carrier",
+       y = "Portion of Flights On Time",
+       title = "Flights On Time From NYC to ATL by Carrier",
+       scale_x_discrete(labels = c("Endeavor", "Delta", "Express Jets",
+                                   "AirTran", "Envoy", "United", "SouthWest")))
 ```
 
 
