@@ -9,7 +9,7 @@ Version: "1.0"
 This is a notebook for Assignment 10 focused on data wrangling
 
 ### Load in packages
-```{r}
+```{r include=FALSE}
 library(tidyverse)
 library(ggplot2)
 ```
@@ -83,7 +83,24 @@ ggplot(JE_Median, aes(x = Quarter, y = Room_Median)) +
   
 ```
 
+### Q5 Graph portion of flights that are on time from NYC to ATL by carrier
+```{r}
+NYC <- read_csv("NYC Flights 2013.csv")
+```
 
+```{r}
+NYC_ATL <- NYC %>%
+  filter(dest == "ATL", !is.na(arr_delay)) %>%
+  group_by(carrier) %>%
+  mutate(on_time = (arr_delay <=0))
+```
+
+
+
+```{r}
+ggplot(data = NYC_ATL, mapping = aes(x=carrier))+
+  geom_bar(aes(fill = on_time), position = "fill")
+```
 
 
 
