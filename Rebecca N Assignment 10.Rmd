@@ -84,10 +84,12 @@ ggplot(JE_Median, aes(x = Quarter, y = Room_Median)) +
 ```
 
 ### Q5 Graph portion of flights that are on time from NYC to ATL by carrier
+### Load data
 ```{r}
 NYC <- read_csv("NYC Flights 2013.csv")
 ```
 
+### Clean data and create new variable for on_time
 ```{r}
 NYC_ATL <- NYC %>%
   filter(dest == "ATL", !is.na(arr_delay)) %>%
@@ -95,16 +97,15 @@ NYC_ATL <- NYC %>%
   mutate(on_time = (arr_delay <=0))
 ```
 
-
-
+### Plot
 ```{r}
 ggplot(data = NYC_ATL, mapping = aes(x=carrier)) +
   geom_bar(aes(fill = on_time), position = "fill") +
   labs(x = "Airline Carrier",
        y = "Portion of Flights On Time",
-       title = "Flights On Time From NYC to ATL by Carrier",
+       title = "Flights On Time From NYC to ATL by Carrier") +
        scale_x_discrete(labels = c("Endeavor", "Delta", "Express Jets",
-                                   "AirTran", "Envoy", "United", "SouthWest")))
+                                   "AirTran", "Envoy", "United", "SouthWest"))
 ```
 
 
